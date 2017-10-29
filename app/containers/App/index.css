@@ -1,0 +1,19 @@
+
+.board {
+    background: #c6cbce !important;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.cards {
+    max-height: 100%;
+    overflow: auto;
+    width: 270px;
+    margin: 0 auto;
+    background-color: #E2E4E6;
+    border-radius: 3px;
+    padding: 5px;
+}
