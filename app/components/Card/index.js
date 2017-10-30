@@ -12,8 +12,13 @@ export default class Card extends Component {
         onDragStart: PropTypes.func.isRequired,
         onDragEnd: PropTypes.func.isRequired,
         onDragOver: PropTypes.func.isRequired,
+        onDelete: PropTypes.func.isRequired,
         data: PropTypes.object.isRequired,
         ind: PropTypes.number.isRequired
+    };
+
+    handleDelete = () => {
+        this.props.onDelete(this.props.data.id);
     };
 
     render() {
@@ -28,6 +33,7 @@ export default class Card extends Component {
                 onDragOver={onDragOver}
             >
                 {isDragging ?'Drop Here': data.task}
+                <button className="delete-button" onClick={this.handleDelete}>x</button>
             </div>
         );
     }

@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import Card from "../../components/Card/index";
+import CreateCard from "../../components/CreateCard/index";
 
 export default class Trello extends Component {
 
@@ -75,23 +76,24 @@ export default class Trello extends Component {
                     task: 'Nine task'
                 },
                 {
-                    id: 12,
+                    id: 16,
                     task: 'Tweleve task'
                 },
                 {
-                    id: 13,
+                    id: 17,
                     task: 'Seven task'
                 },
                 {
-                    id: 14,
+                    id: 18,
                     task: 'Eight task'
                 },
                 {
-                    id: 15,
+                    id: 19,
                     task: 'Nine task'
                 }
             ],
-            dragging: undefined
+            dragging: undefined,
+            showAddCard: false
         }
     }
 
@@ -140,25 +142,62 @@ export default class Trello extends Component {
         });
     };
 
+    handleShowCreateCard = () => this.setState(prevState => ({
+        showAddCard: !prevState.showAddCard
+    }));
+
+    handleSaveCard = (value) => {
+        const data = [ {id: this.state.data.length + 1, task: value}, ...this.state.data ];
+        this.setState({
+            data,
+            showAddCard: false
+        });
+    };
+
+    handleCancelSaveCard = () => {
+        this.setState({
+            showAddCard: false
+        })
+    };
+
+    handleDeleteCard = (id) => {
+        const data = [...this.state.data];
+        const ind = data.findIndex((cardDetail) => cardDetail.id === id);
+        if (ind > -1) {
+            data.splice(ind, 1);
+            this.setState({
+                data
+            });
+        }
+    };
+
 
     render() {
-        const { data, dragging } = this.state;
+        const { data, dragging, showAddCard } = this.state;
         return (
             <div className="board">
                 <div className="cards">
-                {data.map((cardDetail, ind) => {
-                    const isDragging = ind === dragging;
-                    return <Card
-                        data={cardDetail}
-                        key={ind}
-                        ind={ind}
-                        isDragging={isDragging}
-                        onDragStart={this.handleDragStart}
-                        onDragEnd={this.handleDragEnd}
-                        onDragOver={this.handleDrop}
-                    />
-                })}
-            </div>
+                    <div className="cards-title">
+                        <h3> Backend bugs </h3>
+                        <button className="create-card-button" onClick={this.handleShowCreateCard}>Add</button>
+                    </div>
+                    {
+                        showAddCard && <CreateCard onSave={this.handleSaveCard} onCancel={this.handleCancelSaveCard}/>
+                    }
+                    {data.map((cardDetail, ind) => {
+                        const isDragging = ind === dragging;
+                        return <Card
+                            data={cardDetail}
+                            key={ind}
+                            ind={ind}
+                            isDragging={isDragging}
+                            onDragStart={this.handleDragStart}
+                            onDragEnd={this.handleDragEnd}
+                            onDragOver={this.handleDrop}
+                            onDelete={this.handleDeleteCard}
+                        />
+                    })}
+                </div>
             </div>
         )
 

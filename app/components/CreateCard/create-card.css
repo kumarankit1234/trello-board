@@ -1,0 +1,37 @@
+.cards .create-card {
+    border: 1px solid grey;
+    border-radius: 3px;
+    padding: 7px;
+    margin-bottom: 6px;
+}
+
+.cards .create-card.error {
+    border-color: red;
+}
+
+.cards .create-card textarea {
+    resize: none;
+    outline: none;
+    width: 100%;
+}
+
+.cards .create-card button {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    border-radius: 2px;
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+}
+
+.cards .create-card .error-details {
+    font-size: 11px;
+    color: red;
+    margin-left: 5px;
+    display: inline-block;
+}
+
+.cards .create-card .cancel-button {
+    margin-left: 5px;
+}
