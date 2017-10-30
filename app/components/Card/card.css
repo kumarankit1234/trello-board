@@ -6,6 +6,8 @@
     margin-bottom: 6px;
     background: white;
     position: relative;
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
 .card .delete-button {
