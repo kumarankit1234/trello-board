@@ -14,6 +14,7 @@ export default class Trello extends Component {
         super(props);
         // storing data here because not using any data layer.
         this.state = {
+            title: "Backend bugs",
             data: [
                 {
                     id: 1,
@@ -173,12 +174,12 @@ export default class Trello extends Component {
 
 
     render() {
-        const { data, dragging, showAddCard } = this.state;
+        const { data, dragging, showAddCard, title } = this.state;
         return (
             <div className="board">
                 <div className="cards">
                     <div className="cards-title">
-                        <h3> Backend bugs </h3>
+                        <h3> {title} </h3>
                         <button className="create-card-button" onClick={this.handleShowCreateCard}>Add</button>
                     </div>
                     {
